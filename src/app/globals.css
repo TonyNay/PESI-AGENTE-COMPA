@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #f6f5f1;
+  --ink: #12203a;
+  --ink-soft: #55607a;
+  --line: #e4e2da;
+  --card: #ffffff;
+  --brand: #0e8f7e;
+  --brand-dark: #0a6d60;
+  --accent: #e8730c;
+  --good: #0e8f7e;
+  --warn: #d99a0b;
+  --bad: #c8412f;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-soft: var(--ink-soft);
+  --color-line: var(--line);
+  --color-brand: var(--brand);
+  --color-brand-dark: var(--brand-dark);
+  --color-accent: var(--accent);
+  --color-good: var(--good);
+  --color-warn: var(--warn);
+  --color-bad: var(--bad);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+
+html { background: var(--paper); }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; }
+.input {
+  width: 100%; border: 1px solid var(--line); border-radius: 10px; padding: 0.55rem 0.75rem;
+  background: #fff; font-size: 0.9rem; outline: none;
+}
+.input:focus { border-color: var(--brand); box-shadow: 0 0 0 3px rgb(14 143 126 / 0.15); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
+  border-radius: 10px; padding: 0.5rem 0.95rem; font-size: 0.875rem; font-weight: 600;
+  border: 1px solid transparent; cursor: pointer; transition: background 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+.btn-primary { background: var(--brand); color: #fff; }
+.btn-primary:hover:not(:disabled) { background: var(--brand-dark); }
+.btn-ghost { background: #fff; border-color: var(--line); color: var(--ink); }
+.btn-ghost:hover:not(:disabled) { border-color: #c9c6ba; background: #fbfaf7; }
+.btn-danger { background: #fff; border-color: #efc9c2; color: var(--bad); }
+.btn-danger:hover:not(:disabled) { background: #fdf3f1; }
+.label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--ink-soft); margin-bottom: 0.3rem; }
+.eyebrow { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; color: var(--brand); }
+.display { font-family: var(--font-display); letter-spacing: -0.01em; }
+
+@keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.8); } }
+.pulse-dot { animation: pulse-dot 1.2s ease-in-out infinite; }
+
+/* Referencia APA a la que se llegó desde una cita del reporte. */
+.ref:target, .ref.ref-hit { background: #fff4e0; }
+
+@media print {
+  .no-print { display: none !important; }
+  /* "Imprimir / PDF" de un informe: solo ese informe (StrategicWorkspace pone body[data-print]). */
+  body[data-print] .print-all { display: none !important; }
+  body[data-print="informe_gestion"] .print-informe_gestion,
+  body[data-print="informe_ejecutivo"] .print-informe_ejecutivo,
+  body[data-print="informe_gestion_td"] .print-informe_gestion_td,
+  body[data-print="informe_ejecutivo_td"] .print-informe_ejecutivo_td { display: block !important; }
+  html, body { background: #fff !important; }
+  .print-full { margin: 0 !important; padding: 0 !important; max-width: none !important; }
+  .card { break-inside: avoid; box-shadow: none; }
+  a { color: inherit; text-decoration: none; }
+  @page { margin: 14mm; }
+}
